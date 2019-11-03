@@ -6,7 +6,7 @@
 
 /**
  *
- * @author Warren Dereu, Blake Ewalt, sara Lucas
+ * @author Warren Dereu, Blake Ewalt, Sara Lucas
  * Date: 10/30/19
  */
 import java.util.Scanner;
