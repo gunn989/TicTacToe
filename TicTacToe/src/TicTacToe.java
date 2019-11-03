@@ -42,3 +42,6 @@ public class TicTacToe {
                   System.out.println(gameboard[2][2]);
      }
 }
+
+// Checking Methods
+
