@@ -36,6 +36,22 @@ public class TicTacToe {
          
      }
      // Method to print out gameboard
-    
+     public static void printBoard(char[][] gameboard){
+         System.out.print(gameboard[0][0]);
+                  System.out.print("-");
+                  System.out.print(gameboard[0][1]);
+                   System.out.print("-");
+                  System.out.println(gameboard[0][2]);
+                  System.out.print(gameboard[1][0]);
+                  System.out.print("-");
+                  System.out.print(gameboard[1][1]);
+                  System.out.print("-");
+                  System.out.println(gameboard[1][2]);
+                  System.out.print(gameboard[2][0]);
+                  System.out.print("-");
+                  System.out.print(gameboard[2][1]);
+                   System.out.print("-");
+                  System.out.println(gameboard[2][2]);
+     }
      
 }
