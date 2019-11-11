@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -6,55 +8,125 @@
 
 /**
  *
- * @author Warren Dereu, Blake Ewalt, Sara Lucas
- * Date: 10/30/19
+ * @authors Warren Dereu, Blake Ewalt and Sara Lucas
  */
-import java.util.Scanner;
 public class TicTacToe {
+    
+    private static Scanner input = new Scanner(System.in); // Import new scanner
+    private static char currentPlayer = 'X';
+    private static char[][] gameBoard = new char[3][3];
+    private static int row, column;
+    private static boolean isFull;
+    private static boolean cellOccupied = false;
+    
+    
      public static void main(String[] args){
-         Scanner input = new Scanner(System.in); // Import new scanner
          
-         int currentPlayer;
-         
-         
-         // Character array gameboard
+         //to populate cells of gameBoard with dashes
+         for (int i = 0; i < 3; i++) {
+             for (int j = 0; j < 3; j++) {
+                gameBoard[i][j] = '-';
+                //System.out.println();
+             }
+         }
+        
+         game();
          
      }
      public static int game(){
-         int input1;
-         int input2;
-         
-         char[][] gameBoard = {
-         	{'1' ,  '2' , '3'},
-         	{'4', '5' , '6'},
-         	{'7', '8', '9'},
-   	};
-        printBoard(gameBoard);
-        System.out.println("Who wants x");
-        
-         
-         
-     }
-     // Method to print out gameboard
-     public static void printBoard(char[][] gameboard){
-         System.out.print(gameboard[0][0]);
-                  System.out.print("-");
-                  System.out.print(gameboard[0][1]);
-                   System.out.print("-");
-                  System.out.println(gameboard[0][2]);
-                  System.out.print(gameboard[1][0]);
-                  System.out.print("-");
-                  System.out.print(gameboard[1][1]);
-                  System.out.print("-");
-                  System.out.println(gameboard[1][2]);
-                  System.out.print(gameboard[2][0]);
-                  System.out.print("-");
-                  System.out.print(gameboard[2][1]);
-                   System.out.print("-");
-                  System.out.println(gameboard[2][2]);
+         boolean gameOver = false;
+       
+         while (!gameOver) {
+            System.out.println("Please enter a row and column: ");
+            row = input.nextInt() -1;
+            column = input.nextInt() -1;
+            
+            gameBoard[row][column] = currentPlayer;
+            
+            if (Winner(row,column)) {
+                 gameOver = true;
+                 System.out.println("Game Over!  Player " + currentPlayer 
+                 + " wins!");
+                 
+                 break;
+            }
+            
+            else if (BoardIsFull(row,column)) {
+                isFull = true;
+                System.out.println("It's a Draw!");
+                
+                break;
+            }
+            
+            else if (SpotTaken(row,column)) {
+                //cellOccupied = true;
+                System.out.println("That cell has been played");
+            }
+            
+            printBoard();
+            
+            //change player
+            if (currentPlayer == 'X')
+                currentPlayer = 'O';
+            else
+                currentPlayer = 'X';
+         }
+         return 0; 
      }
      
-}
+     // Method to print out gameboard
+     public static void printBoard(){ 
+         for (int i = 0; i < 3; i++) {
+             System.out.println();
+             for (int j = 0; j < 3; j++){
+                 if (j == 0)
+                     System.out.print ("| ");
+                 System.out.print(gameBoard[i][j] + " | ");
+             }
+         }
+         System.out.println();
+     }
+    
+    public static boolean Winner (int rowPlay, int columnPlay) {
+        //check rows for win
+       if ((gameBoard[0][0] + gameBoard[0][1] + gameBoard[0][2] == currentPlayer*3) ||
+           (gameBoard[1][0] + gameBoard[1][1] + gameBoard[1][2] == currentPlayer*3) ||
+           (gameBoard[2][0] + gameBoard[2][1] + gameBoard[2][2] == currentPlayer*3) ||
+           //check columns for win
+	   (gameBoard[0][0] + gameBoard[1][0] + gameBoard[2][0] == currentPlayer*3) ||
+	   (gameBoard[0][1] + gameBoard[1][1] + gameBoard[2][1] == currentPlayer*3) ||
+	   (gameBoard[0][2] + gameBoard[1][2] + gameBoard[2][2] == currentPlayer*3) ||
+            //check diagonal for win
+	   (gameBoard[0][0] + gameBoard[1][1] + gameBoard[2][2] == currentPlayer*3) ||
+	   (gameBoard[2][0] + gameBoard[1][1] + gameBoard[0][2] == currentPlayer*3))       
+     return true;
+        else
+      return false;
+    }
+    
+    public static boolean BoardIsFull (int rowPlay, int columnPlay) {
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                if (gameBoard[i][j] == '-') {
+                    isFull = false;
+                }
+                else
+                    isFull = true;
+            }
+        }
+        return isFull;
+    }
+    
+    public static boolean SpotTaken (int rowPlay, int columnPlay) {
+        if (gameBoard[rowPlay][columnPlay] != '-'){
+          return cellOccupied = true;}
+          
+        else
+          return cellOccupied = false;
+        }   
+    
+    } //end of TicTacToe class
+
 
 // Printing, Marking, and Selecting Methods - Warren
 
