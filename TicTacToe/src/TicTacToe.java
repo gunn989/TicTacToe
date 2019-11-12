@@ -1,4 +1,6 @@
 import java.util.Scanner;
+import java.util.InputMismatchException;
+
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -38,8 +40,20 @@ public class TicTacToe {
        
          while (!gameOver) {
             System.out.println("Please enter a row and column: ");
-            row = input.nextInt() -1;
-            column = input.nextInt() -1;
+            
+            try {
+                row = input.nextInt() -1;
+                column = input.nextInt() -1;
+                if (row < 0 || column < 0 || row >= 4 || column >= 4){
+                System.out.println("Invalid input; re-enter slot number:");
+                continue;
+            }
+            }
+            catch (InputMismatchException  e){
+                System.out.println("Invalid input; re-enter slot number:");
+                break;
+            }
+            
             
             gameBoard[row][column] = currentPlayer;
             
@@ -58,9 +72,10 @@ public class TicTacToe {
                 break;
             }
             
-            else if (SpotTaken(row,column)) {
-                //cellOccupied = true;
+            else  {
+                cellOccupied = true;
                 System.out.println("That cell has been played");
+         
             }
             
             printBoard();
