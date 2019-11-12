@@ -48,6 +48,10 @@ public class TicTacToe {
                 System.out.println("Invalid input; re-enter slot number:");
                 continue;
             }
+                if (SpotTaken(row, column) == true) {
+                System.out.println("Input Occupied; re-enter slot number:");
+                continue;
+            }
             }
             catch (InputMismatchException  e){
                 System.out.println("Invalid input; re-enter slot number:");
@@ -73,8 +77,7 @@ public class TicTacToe {
             }
             
             else  {
-                cellOccupied = true;
-                System.out.println("That cell has been played");
+                System.out.println(currentPlayer +" Turn is over");
          
             }
             
