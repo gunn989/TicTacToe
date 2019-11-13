@@ -20,6 +20,7 @@ public class TicTacToe {
     private static int row, column;
     private static boolean isFull;
     private static boolean cellOccupied = false;
+    private static int rounds = 1;
     
     
      public static void main(String[] args){
@@ -78,7 +79,7 @@ public class TicTacToe {
             
             else  {
                 System.out.println(currentPlayer +" Turn is over");
-         
+                rounds++;
             }
             
             printBoard();
@@ -123,15 +124,15 @@ public class TicTacToe {
     }
     
     public static boolean BoardIsFull (int rowPlay, int columnPlay) {
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
-                if (gameBoard[i][j] == '-') {
-                    isFull = false;
-                }
-                else
-                    isFull = true;
-            }
+        
+        if (rounds < 9)
+        {
+            isFull = false;
         }
+        else {
+            isFull = true;
+        }
+        
         return isFull;
     }
     
